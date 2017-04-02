@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CodaIconMaskFile</key>
+	<string>CssColorsIcon</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.midwinter-dg.plugin.CSScolors</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>CSScolors</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1</string>
+	<key>CodaPlugInSupportedAPIVersion</key>
+	<integer>6</integer>
+	<key>CodaDescriptionString</key>
+	<string>A Simple color palette of CSS named colors</string>
+	<key>CodaIconMaskTintString</key>
+	<string>#91B05A</string>
+	<key>CodaAuthorString</key>
+	<string>D.G. Midwinter</string>
+</dict>
+</plist>

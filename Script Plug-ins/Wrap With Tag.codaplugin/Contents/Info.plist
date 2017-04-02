@@ -153,6 +153,8 @@
 			<string>Div</string>
 			<key>output</key>
 			<string>replaceSelectedText</string>
+			<key>postprocess</key>
+			<string>save</string>
 			<key>script</key>
 			<string>div.php</string>
 			<key>uuid</key>

@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<title>Maps v1.0 - Coda 2.5 Webscript Sidebar Plugin - D.G. Midwinter</title>
+		
+		<link rel="stylesheet" href="styles.css" />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<script src="scripts.js"></script>
+		<script src="generate.js"></script>
+
+	</head>
+
+	<body>
+		<header>
+			<div class="search-bar">
+				<span>
+					<input type="text" id="location" placeholder="search...">
+				</span>
+				<button type="button" id="search">
+					<svg width="30px" height="30px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					    <g id="Page-1" stroke="none" fill="none" fill-rule="evenodd">
+					    	<g class="search-svg">
+								<path d="M16.4038059,19.732233 L21.3553977,24.6838249 C22.1354277,25.4638548 23.3954866,25.4684744 24.1819805,24.6819805 L24.1819805,24.6819805 C24.9630291,23.9009319 24.9627269,22.6342998 24.1838249,21.8553977 L19.232233,16.9038059 L16.4038059,19.732233 L16.4038059,19.732233 Z"></path>
+								<path d="M21,12.5 C21,7.80557963 17.1944204,4 12.5,4 C7.80557963,4 4,7.80557963 4,12.5 C4,17.1944204 7.80557963,21 12.5,21 C17.1944204,21 21,17.1944204 21,12.5 Z M6,12.5 C6,8.91014913 8.91014913,6 12.5,6 C16.0898509,6 19,8.91014913 19,12.5 C19,16.0898509 16.0898509,19 12.5,19 C8.91014913,19 6,16.0898509 6,12.5 Z"></path>
+							</g>
+						</g>
+					</svg>
+				</button>
+			</div>
+			<div class="map-container">
+				<div class="map-wrapper">
+					<div id="map-canvas"><span class="offline">preview not available offline</span></div>
+				</div>
+			</div>
+		</header>
+		
+		<main>
+			
+			<dl>
+				<dt>Lat / Lng</dt>
+				<dd class="lat-lng-controls">
+					<p>geolocation:</p>
+					<div class="row">
+						<label for="geo-lat">lat:</label>
+						<span class="input-wrap">
+							<input type="number" name="geo-lat" id="geo-lat" readonly>
+						</span>
+					</div>
+					<div class="row">
+						<label for="geo-lng">lng:</label>
+						<span class="input-wrap">
+							<input type="number" name="geo-lng" id="geo-lng" readonly>
+						</span>
+					</div>
+					<p>current map center:</p>
+					<div class="row">
+						<label for="map-lat">lat:</label>
+						<span class="input-wrap">
+							<input type="number" name="map-lat" id="map-lat" value="41.8723889">
+						</span>
+					</div>
+					<div class="row">
+						<label for="map-lng">lng:</label>
+						<span class="input-wrap">
+							<input type="number" name="map-lng" id="map-lng" value="12.48018019999995">
+						</span>
+					</div>
+				</dd>
+				<dt>dimensions</dt>
+				<dd class="dimension-controls">
+					<div class="row">
+						<label for="width">width</label>
+						<span class="input-wrap">
+							<input type="text" name="width" id="width" value="800">
+						</span>
+						<select id="width-units">
+							<option value="px">px</option>
+							<option value="%">%</option>
+							<option value="em">em</option>
+							<option value="rem">rem</option>
+							<option value="vw">vw</option>
+							<option value="vh">vh</option>
+						</select>
+					</div>
+					
+					<div class="row">
+						<label for="height">height</label>
+						<span class="input-wrap">
+							<input type="text" name="height" id="height" value="600">
+						</span>
+						<select id="height-units">
+							<option value="px">px</option>
+							<option value="%">%</option>
+							<option value="em">em</option>
+							<option value="rem">rem</option>
+							<option value="vw">vw</option>
+							<option value="vh">vh</option>
+						</select>
+					</div>
+				</dd>
+				
+				<dt>map type</dt>
+				<dd class="map-type-controls">
+					<div class="row">
+						<label for="map-type">map type</label>
+						<select name="map-type" id="map-type">
+							<option value="ROADMAP">roadmap</option>
+							<option value="TERRAIN">terrain</option>
+							<option value="SATELLITE">satellite</option>
+							<option value="HYBRID">hybrid</option>
+						</select>
+					</div>
+					<div class="row">
+						<label for="show-map-type">show map type control</label>
+						<input name="show-map-type" id="show-map-type" class="has-options" type="checkbox">
+						<div class="options">
+							<div class="row">
+								<label for="map-type-menu">style</label>
+								<select name="map-type-menu" id="map-type-menu" disabled>
+									<option value="DEFAULT">default</option>
+									<option value="DROPDOWN_MENU">dropdown</option>
+									<option value="HORIZONTAL_BAR">horiziontal</option>
+								</select>
+							</div>
+							<div class="row">
+								<label for="map-type-position">position</label>
+								<select name="map-type-position" id="map-type-position" disabled>
+									<option value="DEFAULT">default</option>
+									<option value="BOTTOM_CENTER">bottom center</option>
+									<option value="BOTTOM_LEFT">bottom left</option>
+									<option value="BOTTOM_RIGHT">bottom right</option>
+									<option value="LEFT_BOTTOM">left bottom</option>
+									<option value="LEFT_CENTER">left center</option>
+									<option value="LEFT_TOP">left top</option>
+									<option value="RIGHT_BOTTOM">right bottom</option>
+									<option value="RIGHT_CENTER">right center</option>
+									<option value="RIGHT_TOP">right top</option>
+									<option value="TOP_CENTER">top center</option>
+									<option value="TOP_LEFT">top left</option>
+									<option value="TOP_RIGHT">top right</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</dd>
+				
+				<dt>zoom</dt>
+				<dd class="zoom-controls">
+					<div class="row row-with-slider">
+						<label for="zoom">level</label>
+						<span class="slider-wrap">
+							<input type="range" name="zoom" id="zoom" min="1" max="21" step="1" value="8">
+						</span>
+						<input type="text" id="zoom-level" value="8" readonly>
+					</div>
+					<div class="row">
+						<label for="show-zoom">show zoom control</label>
+						<input name="show-zoom" id="show-zoom" class="has-options" type="checkbox">
+						<div class="options">
+							<div class="row">
+								<label for="zoom-type-menu">style</label>
+								<select name="zoom-type-menu" id="zoom-type-menu" disabled>
+									<option value="DEFAULT">default</option>
+									<option value="LARGE">large</option>
+									<option value="SMALL">small</option>
+								</select>
+							</div>
+							<div class="row">
+								<label for="zoom-position">position</label>
+								<select name="zoom-position" id="zoom-position" disabled>
+									<option value="DEFAULT">default</option>
+									<option value="BOTTOM_CENTER">bottom center</option>
+									<option value="BOTTOM_LEFT">bottom left</option>
+									<option value="BOTTOM_RIGHT">bottom right</option>
+									<option value="LEFT_BOTTOM">left bottom</option>
+									<option value="LEFT_CENTER">left center</option>
+									<option value="LEFT_TOP">left top</option>
+									<option value="RIGHT_BOTTOM">right bottom</option>
+									<option value="RIGHT_CENTER">right center</option>
+									<option value="RIGHT_TOP">right top</option>
+									<option value="TOP_CENTER">top center</option>
+									<option value="TOP_LEFT">top left</option>
+									<option value="TOP_RIGHT">top right</option>
+								</select>						
+							</div>
+						</div>
+					</div>
+				</dd>
+				
+				<dt>pan</dt>
+				<dd class="pan-controls">
+					<div class="row">
+						<label for="show-pan">show pan control</label>
+						<input name="show-pan" id="show-pan" class="has-options" type="checkbox">
+						<div class="options">
+							<div class="row">
+								<label for="pan-position">position</label>
+								<select name="pan-position" id="pan-position" disabled>
+									<option value="DEFAULT">default</option>
+									<option value="BOTTOM_CENTER">bottom center</option>
+									<option value="BOTTOM_LEFT">bottom left</option>
+									<option value="BOTTOM_RIGHT">bottom right</option>
+									<option value="LEFT_BOTTOM">left bottom</option>
+									<option value="LEFT_CENTER">left center</option>
+									<option value="LEFT_TOP">left top</option>
+									<option value="RIGHT_BOTTOM">right bottom</option>
+									<option value="RIGHT_CENTER">right center</option>
+									<option value="RIGHT_TOP">right top</option>
+									<option value="TOP_CENTER">top center</option>
+									<option value="TOP_LEFT">top left</option>
+									<option value="TOP_RIGHT">top right</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</dd>
+				
+				<dt>marker</dt>
+				<dd class="marker-controls">
+					<div class="row">
+						<label for="show-marker">show marker</label>
+						<input name="show-marker" id="show-marker" class="has-options show-marker" type="checkbox">
+						<div class="options">
+							<div class="row">
+								<label for="marker-title">title</label>
+								<span class="input-wrap">
+									<input type="text" name="marker-title" id="marker-title" value="marker" disabled>
+								</span>
+							</div>
+							<div class="row">
+								<label for="marker-shape">shape</label>
+								<select name="marker-shape" id="marker-shape" disabled>
+									<option value="pin">pin</option>
+									<option value="star">star</option>
+									<option value="circle">circle</option>
+									<option value="flag">flag</option>
+									<option value="shield">shield</option>
+									<option value="arrow">arrow</option>
+								</select>
+							</div>
+							<div class="row">
+								<label for="marker-size">size</label>
+								<select name="marker-size" id="marker-size" disabled>
+									<option value="small">small</option>
+									<option value="medium" selected>medium</option>
+									<option value="large">large</option>
+								</select>
+							</div>
+							<div class="row">
+								<label for="marker-color">color</label>
+								<select name="marker-color" id="marker-color" disabled>
+									<option value="#FF0000">red</option>
+									<option value="#FF7700">orange</option>
+									<option value="#0F8700">green</option>
+									<option value="#0090FF">blue</option>
+									<option value="#8300FF">violet</option>
+									<option value="#000000">black</option>
+									<option value="#FFFFFF">white</option>
+								</select>
+							</div>
+							<div class="row row-with-slider">
+								<label for="fill-opacity">opacity</label>
+								<span class="slider-wrap">
+									<input type="range" name="fill-opacity" id="fill-opacity" min="0" max="1" step="0.05" value="0.6" disabled>
+								</span>
+								<input type="text" id="fill-opacity-level" value="0.6" readonly disabled>
+							</div>
+							<div class="row">
+								<label for="show-stroke">stroke</label>
+								<input name="show-stroke" id="show-stroke" class="has-options" type="checkbox" disabled>
+								<div class="options">
+									<div class="row">
+										<label for="stroke-color">color</label>
+										<select name="stroke-color" id="stroke-color" disabled>
+											<option value="#FF0000">red</option>
+									<option value="#FF7700">orange</option>
+									<option value="#0F8700">green</option>
+									<option value="#0090FF">blue</option>
+									<option value="#8300FF">violet</option>
+									<option value="#000000">black</option>
+									<option value="#FFFFFF" selected>white</option>
+										</select>
+									</div>
+									<div class="row row-with-slider">
+										<label for="stroke-width">width</label>
+										<span class="slider-wrap">
+											<input type="range" name="stroke-width" id="stroke-width" class="has-level" min="1" max="8" step="1" value="6" disabled>
+										</span>
+										<input type="text" id="stroke-width-level" value="6" readonly disabled>
+									</div>
+									<div class="row row-with-slider">
+										<label for="stroke-opacity">opacity</label>
+										<span class="slider-wrap">
+											<input type="range" name="stroke-opacity" id="stroke-opacity" class="has-level" min="0.05" max="1" step="0.05" value="0.35" disabled>
+										</span>
+										<input type="text" id="stroke-opacity-level" value=".35" readonly disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="marker-location">
+							<p>marker location:</p>
+							<div class="row">
+								<label for="marker-lat">lat:</label>
+								<span class="input-wrap">
+									<input type="number" name="marker-lat" id="marker-lat">
+								</span>
+							</div>
+							<div class="row">
+								<label for="marker-lng">lng:</label>
+								<span class="input-wrap">
+									<input type="number" name="marker-lng" id="marker-lng">
+								</span>
+							</div>
+							<div class="row">
+								<button type="button" id="center-on-marker">center on marker</button>
+							</div>
+						</div>
+					</div>
+				</dd>
+				
+				<dt>info window</dt>
+				<dd class="info-window-controls">
+					<div class="row">
+						<label for="add-info-window">add info window</label>
+						<input name="add-info-window" id="add-info-window" class="has-options" type="checkbox" >
+						<div class="options">
+							<div class="row">
+								<label for="info-window">contents</label>
+								<textarea name="info-window" id="info-window" disabled>&lt;h4&gt;Info Window&lt;/h4&gt;&lt;p&gt;add your contents here&lt;/p&gt;</textarea>
+							</div>
+							<div class="row">
+								<label for="info-window-width">width</label>	
+								<input name="info-window-width" id="info-window-width" type="number" value="200" disabled><label id="info-window-units">px</label>
+
+							</div>
+							<input type="hidden" name="info-window-state" id="info-window-state" val="false" disabled>
+						</div>
+					</div>
+				</dd>
+				
+				<dt>streetview</dt>
+				<dd class="streetview-controls">
+					<div class="row">
+						<label for="show-streetview">show streetview control</label>
+						<input name="show-streetview" id="show-streetview" class="has-options" type="checkbox">
+						<div class="options">
+							<div class="row">
+								<label for="streetview-position">position</label>
+								<select name="streetview-position" id="streetview-position" disabled>
+									<option value="DEFAULT">default</option>
+									<option value="BOTTOM_CENTER">bottom center</option>
+									<option value="BOTTOM_LEFT">bottom left</option>
+									<option value="BOTTOM_RIGHT">bottom right</option>
+									<option value="LEFT_BOTTOM">left bottom</option>
+									<option value="LEFT_CENTER">left center</option>
+									<option value="LEFT_TOP">left top</option>
+									<option value="RIGHT_BOTTOM">right bottom</option>
+									<option value="RIGHT_CENTER">right center</option>
+									<option value="RIGHT_TOP">right top</option>
+									<option value="TOP_CENTER">top center</option>
+									<option value="TOP_LEFT">top left</option>
+									<option value="TOP_RIGHT">top right</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</dd>
+				
+				<dt>additional controls</dt>
+				<dd class="other-coltrols">
+					<div class="row">
+						<label for="show-scale">show scale control</label>
+						<input name="show-scale" id="show-scale" type="checkbox">
+					</div>
+					<div class="row">
+						<label for="show-overview">show overview control</label>
+						<input name="show-overview" id="show-overview" type="checkbox">
+					</div>
+					<div class="row">
+						<label for="scrollwheel">disable mouse scrollwheel</label>
+						<input name="scrollwheel" id="scrollwheel" type="checkbox">
+					</div>
+				</dd>
+				
+				<dt>layers</dt>
+				<dd class="layer-controls">
+					<div class="row">
+						<label for="traffic">traffic</label>
+						<input name="traffic" id="traffic" type="checkbox">
+					</div>
+					<div class="row">
+						<label for="transit">transit</label>
+						<input name="transit" id="transit" type="checkbox">
+					</div>
+					<div class="row">
+						<label for="bicycling">bicycling</label>
+						<input name="bicycling" id="bicycling" type="checkbox">
+					</div>
+				</dd>
+				
+				<dt>custom map style</dt>
+				<dd class="style-controls">
+					<label for="show-styles">customize map</label>
+					<input name="show-styles" id="show-styles" class="has-options set-map-style" type="checkbox">
+					<div class="options">
+						<div class="row">
+							<label for="land">Show landscape</label>
+							<input name="land" id="land" class="set-map-style" type="checkbox" checked disabled>
+							<div class="sub-section">
+								<label class="toggle-color" for="land-color">colorize</label>
+								<input name="land-color" id="land-color" type="checkbox" class="has-options set-map-style">
+								<div class="colorpicker options">
+									<label for="land-h">H</label>
+									<span class="slider-wrap">
+										<input type="range" name="land-h" id="land-h" class="hue set-map-style" min="0" max="59" step="1" value="0">
+									</span>
+									<label for="land-s">S</label>
+									<span class="slider-wrap">
+										<input type="range" name="land-s" id="land-s" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="land-l">L</label>
+									<span class="slider-wrap">
+										<input type="range" name="land-l" id="land-l" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="land-g">γ</label>
+									<span class="slider-wrap">
+										<input type="range" name="land-g" id="land-g" class="set-map-style" min="0.01" max="1.99" step="0.01" value="1">
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="water">Show water</label>
+							<input name="water" id="water" class="set-map-style" type="checkbox" checked disabled>
+							<div class="sub-section">
+								<label class="toggle-color" for="water-color">colorize</label>
+								<input name="water-color" id="water-color" type="checkbox" class="has-options set-map-style">
+								<div class="colorpicker options">
+									<label for="water-h">H</label>
+									<span class="slider-wrap">
+										<input type="range" name="water-h" id="water-h" class="hue set-map-style" min="0" max="59" step="1" value="0">
+									</span>
+									<label for="water-s">S</label>
+									<span class="slider-wrap">
+										<input type="range" name="water-s" id="water-s" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="water-l">L</label>
+									<span class="slider-wrap">
+										<input type="range" name="water-l" id="water-l" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="water-g">γ</label>
+									<span class="slider-wrap">
+										<input type="range" name="water-g" id="water-g" class="set-map-style" min="0.01" max="1.99" step="0.01" value="1">
+									</span>
+								</div>
+								<div class="row">
+									<label class="toggle-color" for="water-labels">Show labels</label>
+									<input name="water-labels" id="water-labels" type="checkbox" class="set-map-style" checked>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="admin">Show administrative</label>
+							<input name="admin" id="admin" class="set-map-style" type="checkbox" checked disabled>
+							<div class="sub-section">
+								<label class="toggle-color" for="admin-color">colorize</label>
+								<input name="admin-color" id="admin-color" type="checkbox" class="has-options set-map-style">
+								<div class="colorpicker options">
+									<label for="admin-h">H</label>
+									<span class="slider-wrap">
+										<input type="range" name="admin-h" id="admin-h" class="hue set-map-style" min="0" max="59" step="1" value="0">
+									</span>
+									<label for="admin-s">S</label>
+									<span class="slider-wrap">
+										<input type="range" name="admin-s" id="admin-s" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="admin-l">L</label>
+									<span class="slider-wrap">
+										<input type="range" name="admin-l" id="admin-l" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="admin-g">γ</label>
+									<span class="slider-wrap">
+										<input type="range" name="admin-g" id="admin-g" class="set-map-style" min="0.01" max="1.99" step="0.01" value="1">
+									</span>
+								</div>
+								<div class="row">
+									<label class="toggle-color" for="admin-labels">Show labels</label>
+									<input name="admin-labels" id="admin-labels" type="checkbox" class="set-map-style" checked>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="poi">Show points of interest</label>
+							<input name="poi" id="poi" class="set-map-style" type="checkbox" checked disabled>
+							<div class="sub-section">
+								<label class="toggle-color" for="poi-color">colorize</label>
+								<input name="poi-color" id="poi-color" type="checkbox" class="has-options set-map-style">
+								<div class="colorpicker options">
+									<label for="poi-h">H</label>
+									<span class="slider-wrap">
+										<input type="range" name="poi-h" id="poi-h" class="hue set-map-style" min="0" max="59" step="1" value="0">
+									</span>
+									<label for="poi-s">S</label>
+									<span class="slider-wrap">
+										<input type="range" name="poi-s" id="poi-s" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="poi-l">L</label>
+									<span class="slider-wrap">
+										<input type="range" name="poi-l" id="poi-l" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="poi-g">γ</label>
+									<span class="slider-wrap">
+										<input type="range" name="poi-g" id="poi-g" class="set-map-style" min="0.01" max="1.99" step="0.01" value="1">
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="road">Show roads</label>
+							<input name="road" id="road" class="set-map-style" type="checkbox" checked disabled>
+							<div class="sub-section">
+								<label class="toggle-color" for="road-color">colorize</label>
+								<input name="road-color" id="road-color" type="checkbox" class="has-options set-map-style">
+								<div class="colorpicker options">
+									<label for="road-h">H</label>
+									<span class="slider-wrap">
+										<input type="range" name="road-h" id="road-h" class="hue set-map-style" min="0" max="59" step="1" value="0">
+									</span>
+									<label for="road-s">S</label>
+									<span class="slider-wrap">
+										<input type="range" name="road-s" id="road-s" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="road-l">L</label>
+									<span class="slider-wrap">
+										<input type="range" name="road-l" id="road-l" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="road-g">γ</label>
+									<span class="slider-wrap">
+										<input type="range" name="road-g" id="road-g" class="set-map-style" min="0.01" max="1.99" step="0.01" value="1">
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label for="trans">Show transit</label>
+							<input name="trans" id="trans" class="set-map-style" type="checkbox" checked disabled>
+							<div class="sub-section">
+								<label class="toggle-color" for="trans-color">colorize</label>
+								<input name="trans-color" id="trans-color" type="checkbox" class="has-options set-map-style">
+								<div class="colorpicker options">
+									<label for="trans-h">H</label>
+									<span class="slider-wrap">
+										<input type="range" name="trans-h" id="trans-h" class="hue set-map-style" min="0" max="59" step="1" value="0">
+									</span>
+									<label for="trans-s">S</label>
+									<span class="slider-wrap">
+										<input type="range" name="trans-s" id="trans-s" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="trans-l">L</label>
+									<span class="slider-wrap">
+										<input type="range" name="trans-l" id="trans-l" class="set-map-style" min="-100" max="100" step="1" value="0">
+									</span>
+									<label for="trans-g">γ</label>
+									<span class="slider-wrap">
+										<input type="range" name="trans-g" id="trans-g" class="set-map-style" min="0.01" max="1.99" step="0.01" value="1">
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</dd>
+			</dl>
+			
+		</main>
+		
+		<footer>
+			<button type="button" id="reload" title="reload">
+				<svg width="18px" height="15px" viewBox="0 0 18 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M13.5,11.5 L9,6.5 L12.3884918,6.5 C11.9337684,4.49601595 10.1415909,3 8,3 C5.51471846,3 3.5,5.01471846 3.5,7.5 C3.5,9.98528154 5.51471846,12 8,12 C9.06987098,12 10.0783659,11.6273117 10.8820339,10.9561852 L12.804959,13.2588704 C11.4666795,14.37644 9.77932527,15 8,15 C3.85786421,15 0.5,11.6421358 0.5,7.5 C0.5,3.35786421 3.85786421,0 8,0 C11.8030781,0 14.9450239,2.83064199 15.4339143,6.5 L18,6.5 L13.5,11.5 Z" id="reload-svg"></path>
+    </g>
+</svg>
+			</button>
+			<button type="button" id="generate">Generate map code</button>
+		</footer>
+		
+	</body>
+</html>

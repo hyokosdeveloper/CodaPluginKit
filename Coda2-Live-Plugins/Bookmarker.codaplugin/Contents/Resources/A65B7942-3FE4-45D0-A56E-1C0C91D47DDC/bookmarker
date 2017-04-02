@@ -1,0 +1,74 @@
+#!/usr/bin/php
+
+<?php
+/*
+ *  @author     Bedrich Rios
+ *  @web        http://bedrichrios.com
+ *  @version    0.1
+ */
+ 
+$fileinfo   = pathinfo($_ENV['CODA_FILEPATH']);
+$ext        = $fileinfo['extension'];
+$bookmark   = $_ENV['CODA_SELECTED_TEXT'] != '' ? $_ENV['CODA_SELECTED_TEXT'] : '$$IP$$';
+
+switch($ext){
+    case 'css':
+        echo '/* !' . $bookmark . ' */';
+        break;
+    case 'less':
+        echo '/* !' . $bookmark . ' */';
+        break;
+    case 'html':
+        echo '<!-- !' . $bookmark . ' -->';
+        break;
+    case 'cfml':
+        echo '<!-- !' . $bookmark . ' -->';
+        break;
+    case 'erb':
+        echo '<!-- !' . $bookmark . ' -->';
+        break;
+    case 'rb':
+        echo '<!-- !' . $bookmark . ' -->';
+        break;
+    case 'rbw':
+        echo '<!-- !' . $bookmark . ' -->';
+        break;
+    case 'py':
+        echo '# !' . $bookmark;
+        break;
+    case 'pyw':
+        echo '# !' . $bookmark;
+        break;
+    case 'pyc':
+        echo '# !' . $bookmark;
+        break;
+    case 'pyo':
+        echo '# !' . $bookmark;
+        break;
+    case 'pyd':
+        echo '# !' . $bookmark;
+        break;
+    case 'xml':
+        echo '<!-- !' . $bookmark . ' -->';
+        break;
+    case 'js':
+        echo '/* !' . $bookmark . ' */';
+        break;
+    case 'php':
+        echo '/* !' . $bookmark . ' */';
+        break;
+    case 'java':
+        echo '// !' . $bookmark;
+        break;
+    case 'jar':
+        echo '// !' . $bookmark;
+        break;
+    case 'class':
+        echo '// !' . $bookmark;
+        break;
+    case 'sql':
+        echo '/* !' . $bookmark . ' */';
+        break;
+}
+
+?>

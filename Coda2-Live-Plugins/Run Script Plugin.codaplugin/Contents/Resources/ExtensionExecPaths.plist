@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>php</key>
+	<string>/usr/bin/php</string>
+	<key>rb</key>
+	<string>/usr/bin/ruby</string>
+	<key>py</key>
+	<string>/usr/bin/python</string>
+	<key>sh</key>
+	<string>/bin/bash</string>
+</dict>
+</plist>

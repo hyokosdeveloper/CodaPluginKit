@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>14E46</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Sass</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.elbongurk.CodaSassPlugin</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Sass</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.1.1</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>3.1.1</string>
+	<key>CodaAuthorString</key>
+	<string>Elbongurk LLC</string>
+	<key>CodaDescriptionString</key>
+	<string>Converts scss files into css files on save.</string>
+	<key>CodaPlugInMinimumAPIVersion</key>
+	<string>7</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>6E35b</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>14D125</string>
+	<key>DTSDKName</key>
+	<string>macosx10.10</string>
+	<key>DTXcode</key>
+	<string>0640</string>
+	<key>DTXcodeBuild</key>
+	<string>6E35b</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.7</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Elbongurk LLC</string>
+	<key>NSPrincipalClass</key>
+	<string>EGSassPlugIn</string>
+</dict>
+</plist>

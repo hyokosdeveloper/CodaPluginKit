@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>11E53</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>HTML Entities</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.joedakroub.plugins.HTML-Entities</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>HTML Entities</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>4E3002</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>11E52</string>
+	<key>DTSDKName</key>
+	<string>macosx10.7</string>
+	<key>DTXcode</key>
+	<string>0433</string>
+	<key>DTXcodeBuild</key>
+	<string>4E3002</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2012 Joe Dakroub. All rights reserved.</string>
+	<key>NSPrincipalClass</key>
+	<string>HTMLEntitiesEncoder</string>
+	<key>SupportedFileExtensions</key>
+	<array>
+		<string>html</string>
+		<string>htm</string>
+		<string>htmls</string>
+		<string>rhtml</string>
+		<string>shtml</string>
+		<string>xhtml</string>
+		<string>xml</string>
+		<string>rss</string>
+	</array>
+	<key>CodaPlugInMinimumAPIVersion</key>
+	<string>6</string>
+	<key>CodaAuthorString</key>
+	<string>Joe Dakroub</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.8.0</string>
+	<key>CodaDescriptionString</key>
+	<string>Encode characters into HTML entities via the Special Characters palette.</string>
+</dict>
+</plist>
